@@ -1,0 +1,228 @@
+﻿@model JobViewModel
+@inject ICompanyRepository _companyRepository
+@{
+    Layout = "_Layout";
+    var Company = _companyRepository.GetById(Model.CompanyId);
+}
+
+<!-- Custom CSS -->
+@section Styles {
+    <link href="~/css/Job/Details.css" rel="stylesheet">
+}
+
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container-lg">
+        <div class="job-details-container">
+            <!-- ===== LEFT COLUMN - JOB DETAILS ===== -->
+            <div>
+                <!-- Job Header -->
+                <div class="job-header">
+                    <div class="job-header-top">
+                        <div class="job-header-info">
+                            <div class="job-logo">T</div>
+                            <div class="job-title-info">
+                                <h1>@Model.Title</h1>
+                                <p>@Company.Name</p>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            @* <button class="action-btn" title="Bookmark"><i class="far fa-bookmark"></i></button>
+                            <button class="action-btn" title="Share"><i class="fas fa-share-alt"></i></button> *@
+                        @* <a class="apply-btn" asp-controller="ApplicationJSC" asp-action="Apply" asp-route-jobId="@Model.Id">Apply Now</a> *@
+                        <a class="apply-btn"
+                           asp-controller="Application"
+                           asp-action="Apply"
+                           asp-route-jobid="@Model.Id">
+                            Apply Now
+                        </a>
+
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Location</span>
+                            <span class="meta-value">@Model.Location, @Model.Country</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Type</span>
+                            <span class="meta-value">@Model.Type</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Salary</span>
+                        <span class="meta-value">@($"{Model.SalaryMin / 1000}K - {Model.SalaryMax / 1000}K")</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Experience Level</span>
+                            <span class="meta-value">@Model.ExperinceLevel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Description -->
+                <div class="job-description-section">
+                    <h2 class="section-title">Job Description</h2>
+                <p class="description-text">@Model.Description</p>
+
+               @*  <p class="description-text">
+                    @Html.Raw(Model.Description?
+                                        .Replace("\r\n", "<br>")
+                                        .Replace("\n", "<br>"))
+                </p> *@
+
+
+                    @* <p class="description-text">
+                        You will have the opportunity to work on challenging problems, mentor junior developers, and contribute to the technical strategy of our organization. This is an excellent opportunity for someone looking to grow their career in a dynamic, fast-paced environment.
+                    </p> *@
+                </div>
+
+                <!-- Requirements Section -->
+                <div class="job-description-section">
+                    <h2 class="section-title">Requirements</h2>
+                    <ul class="requirements-list">
+                        <li>@Model.Requirements</li>                   
+                    </ul>
+                @* <ul class="requirements-list">
+                    @foreach (var line in Model.Requirements?
+                                        .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None))
+                    {
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            <li>@line</li>
+                        }
+                    }
+                </ul> *@
+
+
+                </div>
+
+                <!-- Responsibilities Section -->
+                <!-- <div class="job-description-section">
+                    <h2 class="section-title">Responsibilities</h2>
+                    <ul class="responsibilities-list">
+                        <li>Develop and maintain scalable web applications</li>
+                        <li>Write clean, maintainable, and well-tested code</li>
+                        <li>Collaborate with product and design teams to implement features</li>
+                        <li>Participate in code reviews and technical discussions</li>
+                        <li>Optimize application performance and user experience</li>
+                        <li>Mentor and support junior team members</li>
+                        <li>Contribute to technical documentation and knowledge sharing</li>
+                    </ul>
+                </div> -->
+                <!-- Benefits Section -->
+                <!-- <div class="job-description-section">
+                    <h2 class="section-title">Benefits & Perks</h2>
+                    <ul class="benefits-list">
+                        <li>Competitive salary and performance bonuses</li>
+                        <li>Health and wellness benefits</li>
+                        <li>Professional development and training opportunities</li>
+                        <li>Flexible work arrangements and remote work options</li>
+                        <li>Collaborative and innovative work environment</li>
+                        <li>Career advancement opportunities</li>
+                        <li>Annual leave and paid time off</li>
+                    </ul>
+                </div> -->
+                <!-- Skills Tags -->
+                <div class="job-description-section">
+                    <h2 class="section-title">Required Skills</h2>
+                    <div class="job-tags">
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <span class="job-tag">@skill</span>
+                        }
+                        
+                        @* <span class="job-tag">Node.js</span>
+                        <span class="job-tag">TypeScript</span>
+                        <span class="job-tag">PostgreSQL</span>
+                        <span class="job-tag">AWS</span>
+                        <span class="job-tag">Docker</span>
+                        <span class="job-tag">REST APIs</span>
+                        <span class="job-tag">Git</span> *@
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== RIGHT COLUMN - SIDEBAR ===== -->
+            <aside class="sidebar">
+                <!-- Apply Button -->
+                @* <div class="sidebar-card">
+                    <button class="apply-btn">Apply Now</button>
+                    <button class="save-btn">
+                        <i class="far fa-bookmark"></i> Save Job
+                    </button>
+                </div> *@
+
+                <!-- Company Card -->
+                <div class="sidebar-card company-card">
+                <div class="logo">@(Company.LogoURL ?? Company.Name[0].ToString().ToUpper())</div>
+                    <h3>@Company.Name</h3>
+                    <p>@Company.Description</p>
+                    <div class="company-info">
+                        <div class="company-info-item">
+                            <span class="company-info-label">Industry</span>
+                            <span class="company-info-value">@Company.Industry</span>
+                        </div>
+                        <div class="company-info-item">
+                            <span class="company-info-label">Company Size</span>
+                            <span class="company-info-value">500-1000</span>
+                        </div>
+                        <div class="company-info-item">
+                            <span class="company-info-label">Founded</span>
+                            <span class="company-info-value">@Company.CreatedAt.ToShortDateString()</span>
+                        </div>
+                    </div>
+                <form asp-controller ="Company" asp-action="Profile" asp-route-id="@Model.CompanyId">
+
+                    <button class="view-company-btn">
+                        <i class="fas fa-external-link-alt"></i> View Company
+                    </button>
+                    </form>
+                </div>
+
+                <!-- Similar Jobs -->
+                <!-- <div class="sidebar-card">
+                    <h3 class="section-title">Similar Jobs</h3>
+                    <div class="similar-job-item">
+                        <p class="similar-job-title">.NET Developer</p>
+                        <p class="similar-job-company">Digital Innovations</p>
+                    </div>
+                    <div class="similar-job-item">
+                        <p class="similar-job-title">Frontend Developer</p>
+                        <p class="similar-job-company">WebTech Studios</p>
+                    </div>
+                    <div class="similar-job-item">
+                        <p class="similar-job-title">Backend Engineer</p>
+                        <p class="similar-job-company">Cloud Systems</p>
+                    </div>
+                    <div class="similar-job-item">
+                        <p class="similar-job-title">DevOps Engineer</p>
+                        <p class="similar-job-company">Infrastructure Pro</p>
+                    </div>
+                </div> -->
+                <!-- Share Section -->
+                <div class="sidebar-card">
+                    <h3 class="section-title">Share This Job</h3>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button style="flex: 1; padding: 10px; background: #1877F2; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                        <button style="flex: 1; padding: 10px; background: #1DA1F2; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button style="flex: 1; padding: 10px; background: #0077B5; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                        <button style="flex: 1; padding: 10px; background: #25D366; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+@section Scripts {
+    @* <script src="~/js/Job/Details.js"></script> *@
+}
+

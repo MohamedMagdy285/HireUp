@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+@* ------- FORM TO SEND ROLE TO CONTROLLER ------- *@
+<form asp-Controller="Account" asp-action="SelectionRole" method="post" id="roleForm">
+    <input type="hidden" id="roleInput" name="role" />
+</form>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireUp - Choose Your Role</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/Auth/SelectionRole.css" rel="stylesheet">
+
+    <style>
+        /* تخلي الكارد تتحول لـ selected */
+        .role-card.selected {
+            border: 2px solid #2F80ED;
+            background: #E9F2FF;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="role-selection-wrapper">
+
+            <!-- Left Section -->
+            <div class="left-section">
+                <h1>Start Your Journey With Us</h1>
+                <p>Create your account and unlock access to thousands of job opportunities</p>
+                <ul class="features-list">
+                    <li>
+                        <i class="fas fa-user-plus"></i>
+                        <span>
+                            <strong>Create your profile in minutes</strong><br>
+                            <span style="font-size: 0.9rem; opacity: 0.9;">Quick and easy registration process</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-search"></i>
+                        <span>
+                            <strong>Apply to jobs with one click</strong><br>
+                            <span style="font-size: 0.9rem; opacity: 0.9;">Streamlined application process</span>
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-line"></i>
+                        <span>
+                            <strong>Track your applications</strong><br>
+                            <span style="font-size: 0.9rem; opacity: 0.9;">Monitor all your applications in one place</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Section -->
+            <div class="right-section">
+                <div class="role-header">
+                    <p>Choose your role to get started</p>
+                </div>
+
+                <div class="role-options">
+
+                    <!-- Job Seeker -->
+                    <div class="role-card" onclick="chooseRole('JobSeeker', this)">
+                        <div class="role-icon"><i class="fas fa-user"></i></div>
+                        <div class="role-title">Job Seeker</div>
+                        <p class="role-description">Looking for opportunities</p>
+
+                        <div class="role-benefits">
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Browse 10,000+ jobs</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Get personalized recommendations</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Save favorite jobs</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Track applications</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Employer -->
+                    <div class="role-card" onclick="chooseRole('Employer', this)">
+                        <div class="role-icon"><i class="fas fa-building"></i></div>
+                        <div class="role-title">Employer</div>
+                        <p class="role-description">Looking to hire talent</p>
+
+                        <div class="role-benefits">
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Access qualified candidates</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Post unlimited jobs</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Manage applications</span></div>
+                            <div class="role-benefit-item"><i class="fas fa-check"></i><span>Analytics dashboard</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Terms -->
+                <div class="consent-section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <div class="error-message" id="terms-error">You must agree to the terms and conditions</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-back" onclick="history.back()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+
+                    <button class="btn-continue" id="continueBtn" disabled>
+                        Create Account <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="~/js/Auth/SelectionRole.js"></script>
+</body>
+</html>
+

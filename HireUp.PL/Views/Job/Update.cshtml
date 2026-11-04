@@ -1,0 +1,185 @@
+﻿
+@model JobViewModel
+
+@inject ICategoryRepository _categoryRepository;
+
+@{
+    Layout = "_Layout";
+    var Categories = _categoryRepository.GetAll();
+    SelectList CategoryList = new SelectList(Categories, "Id", "Name"); 
+    
+}
+
+<!-- Custom CSS -->
+@section Styles {
+    <link href="~/css/Job/Add.css" rel="stylesheet">
+}
+
+    <!-- ===== HEADER SECTION ===== -->
+    <section class="header-section">
+        <div class="container-lg">
+            <div class="header-content">
+                <h1 class="header-title" style="color:white"><i class="fas fa-briefcase"></i> Edit The Job</h1>
+                <p class="header-subtitle" style="color:white">Fill in the details below to Edit The job listing</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN FORM ===== -->
+    <main class="container-lg">
+        <div class="form-container">
+            <div class="form-success" id="successMessage">
+                <i class="fas fa-check-circle"></i> Job Updated successfully!
+            </div>
+
+            <form id="jobForm" asp-controller="Job" asp-action="Update" method="post" novalidate>
+
+                <!-- ===== BASIC INFORMATION ===== -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> Basic Information</h2>
+
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Title">Job Title <span class="required">*</span></label>
+                        @* <input type="text" class="form-control" id="title" placeholder="e.g., Senior Full Stack Developer" required> *@
+                        <input class="form-control" asp-for="Title" placeholder="e.g., Senior Full Stack Developer" required>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="CategoryId">Category <span class="required">*</span></label>
+                            @* <select class="form-control" id="category" required> *@
+                            <select class="form-control" asp-for="CategoryId" asp-items="CategoryList" required>
+                                <option value="" disabled selected>Select Category</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Type" class="form-label">Job Type <span class="required">*</span></label>
+                            @* <select class="form-control" id="type" required> *@
+                            <select asp-for="Type" class="form-control" id="type" required>
+                                <option value="">Select Job Type</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Internship">Internship</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ExperinceLevel" class="form-label">Experience Level <span class="required">*</span></label>
+                        @* <select class="form-control" id="experienceLevel" required> *@
+                        <select asp-for="ExperinceLevel" class="form-control" id="experienceLevel" required>
+                            <option value="">Select Experience Level</option>
+                            <option value="Entry Level">Entry Level</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Mid Level">Mid Level</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Lead">Lead</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Description">Job Description <span class="required">*</span></label>
+                        @* <textarea class="form-control" id="description" placeholder="Describe the job role, responsibilities, and what you're looking for..." required></textarea> *@
+                        <textarea class="form-control" asp-for="Description" placeholder="Describe the job role, responsibilities, and what you're looking for..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Requirements">Requirements <span class="required">*</span></label>
+                        @* <textarea class="form-control" id="requirements" placeholder="List the key requirements and qualifications..." required></textarea> *@
+                        <textarea class="form-control" asp-for="Requirements" placeholder="List the key requirements and qualifications..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- ===== LOCATION ===== -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Location</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="Country" class="form-label">Country <span class="required">*</span></label>
+                            <select class="form-control" asp-for="Country" required>
+                                <option value="">Select Country</option>
+                                <option value="Egypt">Egypt</option>
+                                <option value="United Arab Emirates">United Arab Emirates</option>
+                                <option value="Saudi Arabia">Saudi Arabia</option>
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Remote">Remote</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Location">City/Location <span class="required">*</span></label>
+                            @* <input type="text" class="form-control" id="location" placeholder="e.g., Cairo, Alexandria, Remote" required> *@
+                            <input  class="form-control" asp-for="Location" placeholder="e.g., Cairo, Alexandria, Remote" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SALARY ===== -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-dollar-sign"></i> Salary Range</h2>
+
+                    <div class="salary-range">
+                        <div class="form-group">
+                            <label class="form-label" asp-for="SalaryMin">Minimum Salary ($) <span class="required">*</span></label>
+                            @* <input type="number" class="form-control" id="salaryMin" placeholder="0" min="0" step="1000" required> *@
+                            <input type="number" class="form-control" asp-for="SalaryMin" placeholder="0" min="0" step="1000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" asp-for="SalaryMax">Maximum Salary ($) <span class="required">*</span></label>
+                            @* <input type="number" class="form-control" id="salaryMax" placeholder="0" min="0" step="1000" required> *@
+                            <input type="number" class="form-control" asp-for="SalaryMax" placeholder="0" min="0" step="1000" required>
+                        </div>
+
+                        <div class="salary-display" id="salaryDisplay">
+                            $0 - $0
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SKILLS ===== -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Required Skills</h2>
+
+                    <div class="skill-input-wrapper">
+                        @* <input type="text" id="skillInput" placeholder="Add a skill (e.g., React, Node.js, Python)..." class="form-control"> *@
+                        <input type="text" asp-for="Skills" placeholder="Add a skill (e.g., React, Node.js, Python)..." class="form-control">
+                        <button type="button" id="addSkillBtn">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+
+                    <div class="skills-list" id="skillsList"></div>
+
+                    <input type="hidden" id="SkillsHidden" name="Skills">
+
+                </div>
+
+                <!-- ===== FORM ACTIONS ===== -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Edit Job
+                    </button>
+                <a class="btn-cancel d-flex align-items-center justify-content-center" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-times m-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+@section Scripts {
+    <script src="~/js/Job/Add.js"></script>
+}
+
+

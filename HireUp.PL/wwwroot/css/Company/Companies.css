@@ -1,0 +1,179 @@
+﻿/* ===== Page Structure ===== */
+.companies-list-section {
+    padding: 30px;
+}
+
+.companies-header {
+    margin-bottom: 20px;
+}
+
+.companies-title {
+    font-size: 24px;
+    color: #1A2B4B;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .companies-title i {
+        color: #2F80ED;
+        font-size: 22px;
+    }
+
+/* ===== Grid ===== */
+.companies-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+}
+
+/* ===== Card ===== */
+.company-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    transition: all .25s ease;
+}
+
+    .company-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    }
+
+/* ===== Logo ===== */
+.company-card-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.company-logo-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 14px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.company-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-logo-placeholder {
+    background: #EAF1FF;
+    color: #2F80ED;
+    font-size: 32px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* ===== Body ===== */
+.company-card-body {
+    margin-top: 8px;
+    text-align: left;
+}
+
+.company-name {
+    font-size: 20px;
+    color: #1A2B4B;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* Industry Tag */
+.industry-tag {
+    background: #E4EEFF;
+    color: #2F80ED;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Rating */
+.company-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+    .company-rating i {
+        color: #FFB800;
+        font-size: 15px;
+    }
+
+.rating-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.rating-count {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Description */
+.company-description {
+    color: #6F7A90;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Metadata */
+.company-meta {
+    font-size: 14px;
+    padding: 8px 0;
+    border-top: 1px solid #EEF1F6;
+    color: #344767;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .company-meta i {
+        color: #2F80ED;
+        font-size: 16px;
+    }
+
+/* ===== Button ===== */
+.company-card-footer {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.btn-visit-website {
+    width: 100%;
+    padding: 12px 18px;
+    background: #2F80ED !important;
+    border-radius: 10px;
+    font-size: 15px;
+    display: block;
+}
+
+    .btn-visit-website.disabled {
+        opacity: .45;
+        pointer-events: none;
+    }
+
+/* ===== Empty State ===== */
+.empty-results {
+    text-align: center;
+    margin-top: 60px;
+    color: #888;
+}
+
+    .empty-results i {
+        font-size: 45px;
+        margin-bottom: 10px;
+        color: #2F80ED;
+    }

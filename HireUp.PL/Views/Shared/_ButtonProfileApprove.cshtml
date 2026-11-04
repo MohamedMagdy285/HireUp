@@ -1,0 +1,32 @@
+﻿@model JobSeekerProfileViewModel
+<link href="~/css/site.css" rel="stylesheet">
+
+<div class="profile-action-buttons">
+    <!-- Approve Button -->
+    <form asp-controller="Application"
+       asp-action="Approve"
+       asp-route-id="@Model.ApplicationId">
+       <button class="btn-profile-primary">
+        <i class="fas fa-check"></i> Approve
+        </button>
+       asp-route-id="@Model.Id"
+     </form> 
+
+    <!-- Reject Button -->
+    <a asp-controller="Application"
+       asp-action="Reject"
+       asp-route-id="@Model.Id"
+       class="btn-profile-secondary">
+        <i class="fas fa-times"></i> Reject
+    </a>
+</div>
+
+    @* <form asp-controller="Application"
+          asp-action="Approve"
+          asp-route-id="@Model.ApplicationId"
+          method="post"
+          style="display:inline;">
+        <button type="submit" class="btn-profile-primary">
+            <i class="fas fa-check"></i> Approve
+        </button>
+    </form> *@

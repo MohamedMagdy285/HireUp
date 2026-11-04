@@ -1,0 +1,175 @@
+﻿@model JobSeekerProfileViewModel
+@{
+	Layout = "_Layout";
+}
+@section Styles {
+	<link rel="stylesheet" href="~/css/JobSeeker/UpdateProfile.css" asp-append-version="true" />
+}
+
+<div class="header"></div>
+
+<div class="container-main">
+    <div class="profile-card">
+        @* <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            ✓ Profile updated successfully!
+        </div> *@
+
+        <form id="editForm" asp-action="UpdateProfile" asp-controller="JobSeeker" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Id" />
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="avatar-wrapper">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <input type="file" id="avatarUpload" accept="image/*">
+                </div>
+                <div class="avatar-upload-hint">Click avatar to change</div>
+            </div>
+        <!-- Personal Information -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon"><i class="fas fa-user-circle"></i></div>
+                    Personal Information
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" asp-for="FirstName" >First Name</label>
+                        @* <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required> *@
+                        <input  class="form-control" asp-for="FirstName" value="@Model.FirstName" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="LastName" >Last Name</label>
+                        @* <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required> *@
+                        <input asp-for="LastName" value="@Model.LastName"  class="form-control"  placeholder="Enter your last name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" asp-for="NationalNumber" >National ID</label>
+                        @* <input type="text" class="form-control" id="nationalId" placeholder="e.g., 12345678901234" required> *@
+                        <input asp-for="NationalNumber" value="@Model.NationalNumber" class="form-control" placeholder="Enter your National ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="PhoneNumber" >Phone</label>
+                        @* <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required> *@
+                        <input asp-for="PhoneNumber" value="@Model?.PhoneNumber" class="form-control"  placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Country">Country</label>
+                        @* <input type="text" class="form-control" id="nationalId" placeholder="e.g., 12345678901234" required> *@
+                        <input asp-for="Country" value="@Model.Country" class="form-control" placeholder="Enter your National ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Location">Location</label>
+                        @* <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required> *@
+                        <input asp-for="Location" value="@Model?.Location" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="Email" >Email</label>
+                    @* <input type="email" class="form-control" id="email" placeholder="Enter your email" required> *@
+                    <input asp-for="Email" value="@Model.Email" class="form-control" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <!-- Professional Information -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon"><i class="fas fa-briefcase"></i></div>
+                    Professional Information
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="ExperinceYears" >Experience</label>
+                    @* <textarea class="form-control" id="experience" placeholder="Describe your professional experience..."></textarea> *@
+                    <input type="number" min="0" max="30" step="1" asp-for="ExperinceYears" value="@Model?.ExperinceYears" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Education" class="form-label">Education</label>
+                    @* <textarea class="form-control" id="education" placeholder="Describe your educational background..."></textarea> *@
+                    <input maxlength="50" row="1" asp-for="Education" class="form-control" placeholder="Write your field of study only, e.g., Engineering student / Business graduate">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" asp-for="CVPath" >Upload CV</label>
+                    <div class="file-upload">
+                        <input asp-for="CVPath" type="file" id="cvFile" accept=".pdf,.doc,.docx">
+                        <label class="file-upload-label" for="cvFile">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Click to upload CV
+                        </label>
+                    </div>
+                    <div class="file-name" id="cvFileName"></div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            @* <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon"><i class="fas fa-star"></i></div>
+                    Skills
+                </div>
+
+                <div class="skill-input-group">
+                    <input type="text" id="skillInput" class="form-control" placeholder="e.g., C#, HTML, CSS, JavaScript..." maxlength="50">
+                    <button type="button" id="addSkillBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add
+                    </button>
+                </div>
+
+                <div class="skills-container" id="skillsContainer"></div>
+
+                <!-- Hidden input that stores comma-separated skills -->
+                <input type="hidden" asp-for="Skills" id="SkillsHidden" />
+            </div> *@
+
+
+            <!-- Bio -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon"><i class="fas fa-align-left"></i></div>
+                    Bio
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" asp-for="Bio" placeholder="Tell us about yourself..."></textarea>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Save Changes
+                </button>
+                <input asp-controller="JobSeeker" asp-action="UpdateProfile" type="submit" class="btn btn-secondary" value="✖ Cancel">
+                    
+                @* </a> *@
+            </div>
+        </form>
+    </div>
+    </div>
+@section Scripts {
+    <script src="~/js/JobSeeker/UpdateProfile.js"></script>
+}

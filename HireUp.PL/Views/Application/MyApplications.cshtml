@@ -1,0 +1,158 @@
+﻿@model List<ApplicationViewModel>
+
+@section Styles {
+    <link href="~/css/Application/MyApplications.css" rel="stylesheet">
+}
+<!-- ===== HEADER SECTION ===== -->
+<section class="header-section">
+    <div class="container-lg">
+        <div class="header-content">
+            <h1 class="header-title" style="color: white"><i class="fas fa-briefcase"></i> My Applications</h1>
+            <p class="header-subtitle" style="color: white">Track and manage all your job applications</p>
+        </div>
+        <div class="search-section">
+            <form method="GET" class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text"
+                       class="search-input"
+                       name="search"
+                       placeholder="Search by job title or company...">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="container-lg mb-5">
+
+    <!-- ===== TABLE SECTION ===== -->
+    @if(Model.Count() > 0)
+    {
+        
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Job Position</th>
+                    <th>Company</th>
+                    <th>Applied On</th>
+                    <th>Salary</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Application 1 -->
+                @foreach(var app in Model)
+                {                    
+                <tr>
+                    <td>
+                        <div class="job-info">
+                            <div class="job-logo">T</div>
+                            <div class="job-details">
+                                @* <h6>Senior Full Stack Developer</h6> *@
+                                @* <h6>@app?.Job.Title</h6> *@
+                                    <h6>@(app.Job?.Title ?? "Unknown job")</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @* <strong>TechCorp Solutions</strong><br> *@
+                        @* <strong>@app.Company.Name</strong><br> *@
+                        <strong>@(app.Job?.Company?.Name?? "NA")</strong><br>
+                            <small style="color: #7A8A99;">@(app.Job?.Company?.Country ?? "NA"),@(app.Job?.Company?.Location ?? "NA") </small><br>
+                    </td>
+                    <td>
+                        @* <small>Nov 28, 2025</small> *@
+                        <small>@app?.AppliedAt</small>
+                    </td>
+                    <td>
+                        @* <small>$60k - $80k</small> *@
+                        @* <small>@app?.Job.SalaryMin - @app?.Job.SalaryMax</small> *@
+                            <small>
+                                @($"{app.Job.SalaryMin / 1000}K - {app.Job.SalaryMax / 1000}K")
+                        </small>
+                    </td>
+                    
+                        @if (app.Status == "Pending")
+                        {
+                            <td>
+                        @* <span class="status-badge status-pending">Pending</span> *@
+                            <span class="status-badge status-pending">@app?.Status</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                            
+                            @* <form method="POST" style="display: inline;">
+                                <button type="submit" name="withdrawApplication" value="1" class="btn-small btn-delete" onclick="return confirm('Withdraw this application?');">
+                                    <i class="fas fa-trash"></i> Withdraw
+                                </button>
+                            </form> *@
+                                    <form asp-controller="Application" asp-action="Delete" asp-route-id="@app.Id" method="post" style="display: inline;">
+                                        @* <input type="hidden" name="id" value="@app.Id" /> *@
+
+                                        <button type="submit" class="btn-small btn-delete"
+                                                onclick="return confirm('Withdraw this application?');">
+                                            <i class="fas fa-trash"></i> Withdraw
+                                        </button>
+                                    </form>
+
+
+                        </div>
+                            </td>
+
+                        }
+                        else if (app.Status == "Rejected")
+                        {
+                            <td>
+                                @* <span class="status-badge status-pending">Pending</span> *@
+                                <span class="status-badge status-rejected">@app?.Status</span>
+                            </td>
+                            <td>
+                                @* <span class="status-badge status-pending">Pending</span> *@
+                                <span class="status-badge text-secondary">Completed</span>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @* <span class="status-badge status-pending">Pending</span> *@
+                                <span class="status-badge status-approved">@app?.Status</span>
+                            </td>
+                            <td>
+                                @* <span class="status-badge status-pending">Pending</span> *@
+                                <span class="status-badge text-secondary">Completed</span>
+                            </td>
+                        }
+                        <td>
+                            <form method="get"
+                                  asp-controller="Job"
+                                  asp-action="Details"
+                                  asp-route-id="@app.Job.Id">
+
+                                <button type="submit" class="btn-small btn-view">
+                                    <i class="fas fa-user"></i> View Job
+                                </button>
+                            </form>
+                        </td>                   
+                </tr>      
+                }
+            </tbody>
+        </table>
+        </div>
+    }
+    else{
+
+        <!-- No Results  -->
+        <div class="no-results" style="margin:auto">
+            <i class="fas fa-inbox"></i>
+            <h3>No applications found</h3>
+            <p>Start applying to jobs to see them here</p>
+        </div>
+    }
+
+   
+</main>

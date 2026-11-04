@@ -1,0 +1,10 @@
+﻿@model JobSeekerProfileViewModel
+
+<div class="profile-action-buttons">
+    <a asp-controller="JobSeeker" asp-action="UpdateProfile" asp-route-jobseekerid="@Model.Id" class="btn-profile-primary">
+        <i class="fas fa-edit"></i> Edit Profile
+    </a>
+    <a asp-controller="Application" asp-action="MyApplications" class="btn-profile-secondary">
+        <i class="fas fa-list"></i> My Applications
+    </a>
+</div>

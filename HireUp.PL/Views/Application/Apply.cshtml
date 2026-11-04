@@ -1,0 +1,155 @@
+﻿@model ApplicationViewModel
+
+@* @inject IJobRepository _jobRepository;
+@inject IJobSeekerRepository _jobSeekerRepository;
+@inject ICompanyRepository _companyRepository; *@
+@{
+    // var job = _jobRepository.GetById(Model.JobId.Value);
+    // Job? job = null;
+
+    // if (Model?.JobId != null)
+    // {
+    // var job = _jobRepository.GetById(Model.JobId.Value);
+    // var Company = _companyRepository.GetById(job.CompanyId);
+    // var jobSeeker = _jobSeekerRepository.GetById(Model.JobSeekerId);
+    // }
+}
+
+@section Styles {
+    <link href="~/css/Application/Apply.css" rel="stylesheet">
+}
+
+
+<!-- ===== HEADER SECTION ===== -->
+<section class="header-section">
+    <div class="container-lg">
+        <div class="header-content">
+            <h1 class="header-title" style="color:white" ><i class="fas fa-file-alt"></i> Apply for Job</h1>
+            <p class="header-subtitle" style="color:white">Submit your application to apply for this position</p>
+
+            <!-- Job Preview -->
+            <div class="job-preview">
+                @* <div class="job-preview-title">Senior Full Stack Developer</div> *@
+                <div  class="job-preview-title" >@Model.Job.Title</div>
+                <div class="job-preview-info">
+                    @* <span><i class="fas fa-building"></i> TechCorp Solutions</span> *@
+                    <span><i class="fas fa-building"></i> @(@Model.Company.Name ?? "UnKnown")</span>
+                    @* <span><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</span> *@
+                    <span><i class="fas fa-map-marker-alt"></i> @Model.Company.Country - @Model.Company.Location</span>
+                    @* <span><i class="fas fa-dollar-sign"></i> $60k - $80k</span> *@
+                    <span><i class="fas fa-dollar-sign"></i>@($"{Model.Job.SalaryMin / 1000}K - {Model.Job.SalaryMax / 1000}K")</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAIN FORM ===== -->
+<main class="container-lg mb-5">
+    <div class="form-container">
+        @* <div class="form-success" id="successMessage">
+            <i class="fas fa-check-circle"></i> Application submitted successfully! We will review it shortly.
+        </div>
+
+        <div class="form-error" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i> Please fill in all required fields correctly.
+        </div> *@
+
+        @* <form id="applicationForm" enctype="multipart/form-data"> *@
+        <form asp-Controller="Application" asp-action="Apply" enctype="multipart/form-data" method="Post" novalidate>
+            <!-- ===== PERSONAL INFORMATION ===== -->
+        <input type="hidden" asp-for="JobId" />
+        <input type="hidden" asp-for="CompanyId" />
+        <input type="hidden" asp-for="JobSeekerId" />
+
+            <div class="form-section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Personal Information</h2>
+
+                <div class="form-group">
+            <label asp-for="JobSeeker.FirstName"  class="form-label">First Name</label>
+                <input asp-for="JobSeeker.FirstName"
+                           class="form-control"
+                           readonly>
+                </div>
+            <div class="form-group">
+                <label asp-for="JobSeeker.LastName"  class="form-label">Last Name</label>
+                <input asp-for="JobSeeker.LastName"
+                       class="form-control"
+                       readonly>
+            </div>
+
+                <div class="form-group">
+                    <label asp-for="JobSeeker.Email" class="form-label" >Email Address </label>
+            <input asp-for="JobSeeker.Email"
+                           class="form-control"
+                           readonly>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="JobSeeker.PhoneNumber" class="form-label" >Phone Number <span class="required">*</span></label>
+                     <input asp-for="JobSeeker.PhoneNumber"
+                           class="form-control"                
+                           placeholder="Enter your phone number"
+                           required>
+                </div>
+            </div>
+
+            <!-- ===== CV UPLOAD ===== -->
+            <div class="form-section">
+                @* <h2 class="section-title"><i class="fas fa-file-pdf"></i> Upload CV/Resume</h2> *@
+
+                @* <div class="form-group">
+                    <label asp-for ="JobSeeker.CVPath" class="form-label">CV/Resume <span class="required">*</span></label>
+                    <div class="file-upload-wrapper" id="fileUploadArea">
+                        <div class="file-upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="file-upload-text">Click to upload or drag and drop</div>
+                        <div class="file-upload-hint">PDF, DOC, DOCX (max 5MB)</div>
+                        <input asp-for="JobSeeker.CVPath" type="file" id="cvFile" name="cv" accept=".pdf,.doc,.docx" required>
+                    </div>
+                    <div class="file-name" id="fileName">
+                        <span class="file-name-text" id="fileNameText"></span>
+                        <button type="button" class="file-remove" id="removeFile">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div> *@
+            @*     <div class="form-group">
+                    <label class="form-label">Upload CV</label>
+                    <div class="file-upload">
+                        <input type="file" asp-for="JobSeekerViewModel.CVPath" accept=".pdf,.doc,.docx">
+                        <label class="file-upload-label" asp-for="JobSeekerViewModel.CVPath">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Click to upload CV
+                        </label>
+                    </div>
+                    <div class="file-name" id="cvFileName"></div>
+                </div>
+            </div> *@
+            <h2 class="section-title"><i class="fas fa-file-pdf"></i> Upload CV/Resume</h2>
+                <input asp-for="JobSeekerViewModel.CVPath" type="file" id="cvFile" accept=".pdf,.doc,.docx" required>
+
+            <!-- ===== FORM ACTIONS ===== -->
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+                @* <button type="button" class="btn-cancel">
+                    <i class="fas fa-times"></i> Cancel
+                </button> *@
+        <a class="btn-cancel d-flex align-items-center justify-content-center" asp-controller="Job" asp-action="Details" asp-route-id="@Model.JobId">
+            <i class="fas fa-times m-1"></i> Cancel
+        </a>
+            </div>
+        </form>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="~/js/JobSeeker/UpdateProfile.js"></script>
+}

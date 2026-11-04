@@ -1,0 +1,54 @@
+﻿@model JobViewModel
+
+<div class="job-card">
+
+    <!-- Header -->
+    <div class="job-card-header">
+        <div style="display:flex; align-items:center; flex:1;">
+
+            <!-- Dynamic Logo (first letter of company name) -->
+            <div class="job-logo">
+                @(Model.Company?.Name?.FirstOrDefault() ?? 'M')
+            </div>
+
+            <div class="job-main-info">
+                <h3 class="job-title">@Model.Title</h3>
+
+                <p class="job-company">
+                    @(Model.Company?.Name ?? "Unknown Company")
+                </p>
+            </div>
+        </div>
+
+        <button class="bookmark-btn"><i class="far fa-bookmark"></i></button>
+    </div>
+
+    <!-- Meta -->
+    <div class="job-meta">
+        <span><i class="fas fa-map-marker-alt"></i> @Model.Country, @Model.Location</span>
+        <span><i class="fas fa-clock"></i> @Model.Type</span>
+        <span><i class="fas fa-dollar-sign"></i> @($"{Model.SalaryMin / 1000}K - {Model.SalaryMax / 1000}K")</span>
+        <span><i class="fas fa-briefcase"></i> @Model.ExperinceLevel</span>
+    </div>
+
+    <!-- Description -->
+    <p class="job-description">@Model.Description</p>
+
+    <!-- Skills -->
+    <div class="job-tags">
+        @if (Model.Skills != null)
+        {
+            foreach (var skill in Model.Skills)
+            {
+                <span class="job-tag">@skill</span>
+            }
+        }
+    </div>
+
+    <!-- Footer -->
+    <div class="job-footer">
+        <span class="job-date" >@Model.CreatedAt.ToShortDateString()</span>
+        <span class="job-salary">@($"{Model.SalaryMin / 1000}K - {Model.SalaryMax / 1000}K")</span>
+        <a type="submit" class="btn-apply" asp-controller="Job" asp-action="Details" asp-route-id="@Model.Id">Apply Now</a>
+    </div>
+</div>

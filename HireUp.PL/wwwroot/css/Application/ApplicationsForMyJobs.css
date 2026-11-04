@@ -1,0 +1,356 @@
+﻿:root {
+    --primary-color: #2F80ED;
+    --secondary-color: #1C3A57;
+    --bg-light: #F2F6FC;
+    --text-dark: #0D1B2A;
+    --success-color: #00C897;
+    --warning-color: #F2994A;
+    --danger-color: #EB5757;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 12px rgba(47, 128, 237, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color) !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    margin: 0 15px;
+    transition: var(--transition);
+}
+
+    .nav-link:hover {
+        color: var(--primary-color) !important;
+    }
+
+/* ===== HEADER SECTION ===== */
+.header-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1E5BA8 100%);
+    padding: 40px 0;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ===== SEARCH BAR SECTION ===== */
+.search-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-box {
+    position: relative;
+    background: white;
+    border-radius: 50px;
+    padding: 8px 8px 8px 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+    .search-box:focus-within {
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        transform: translateY(-2px);
+    }
+
+.search-icon {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 12px 0;
+    color: var(--text-dark);
+}
+
+    .search-input::placeholder {
+        color: #A0A0A0;
+    }
+
+.search-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+    .search-btn:hover {
+        background: #1E5BA8;
+        transform: scale(1.05);
+    }
+
+/* ===== TABLE SECTION ===== */
+.table-container {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    overflow-x: auto;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+    .table thead {
+        background: #F8F9FA;
+        border-bottom: 2px solid #E0E7F1;
+    }
+
+        .table thead th {
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+    .table tbody td {
+        padding: 15px;
+        vertical-align: middle;
+        border-bottom: 1px solid #E0E7F1;
+    }
+
+    .table tbody tr:hover {
+        background: #F8F9FA;
+    }
+
+/* ===== APPLICANT INFO ===== */
+.applicant-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.applicant-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.applicant-details h6 {
+    margin: 0 0 4px 0;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.applicant-details p {
+    margin: 0;
+    color: #7A8A99;
+    font-size: 0.85rem;
+}
+
+/* ===== STATUS BADGE ===== */
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #FFF3CD;
+    color: #856404;
+    border: 1px solid #FFEEBA;
+}
+
+.status-approved {
+    background: #D4EDDA;
+    color: #155724;
+    border: 1px solid #C3E6CB;
+}
+
+.status-rejected {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-view {
+    background: var(--primary-color);
+    color: white;
+}
+
+    .btn-view:hover {
+        background: #1E5BA8;
+        transform: translateY(-2px);
+    }
+
+.btn-approve {
+    background: var(--success-color);
+    color: white;
+}
+
+    .btn-approve:hover {
+        background: #00B382;
+        transform: translateY(-2px);
+    }
+
+.btn-reject {
+    background: var(--danger-color);
+    color: white;
+}
+
+    .btn-reject:hover {
+        background: #CC4444;
+        transform: translateY(-2px);
+    }
+
+/* ===== NO RESULTS ===== */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7A8A99;
+}
+
+    .no-results i {
+        font-size: 3rem;
+        color: #E0E7F1;
+        margin-bottom: 15px;
+    }
+
+    .no-results h3 {
+        color: var(--text-dark);
+        margin-bottom: 10px;
+    }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .table-container {
+        padding: 15px;
+    }
+
+    .table thead th {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+
+    .table tbody td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .applicant-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .applicant-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn-small {
+        width: 100%;
+        justify-content: center;
+    }
+}

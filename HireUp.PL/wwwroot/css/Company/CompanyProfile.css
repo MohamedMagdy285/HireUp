@@ -1,0 +1,337 @@
+﻿
+:root {
+    --primary-color: #2F80ED;
+    --secondary-color: #1C3A57;
+    --bg-light: #F2F6FC;
+    --text-dark: #0D1B2A;
+    --success-color: #00C897;
+    --danger-color: #EB5757;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --transition-base: all 0.3s ease;
+    --font-heading: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-light);
+    min-height: 100vh;
+}
+
+
+/* ===== PROFILE SECTION ===== */
+.page-wrapper {
+    padding: 40px 20px;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out;
+    margin: 0 auto;
+}
+
+.profile-header-bg {
+    margin-bottom:30px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1E5BA8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+    .profile-header-bg::before {
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: -50px;
+        right: -50px;
+    }
+
+    .profile-header-bg::after {
+        content: '';
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        bottom: -30px;
+        left: -30px;
+    }
+
+.profile-content {
+    padding: 60px 120px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+}
+
+.company-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--bg-light);
+    border: 5px solid white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    box-shadow: 0 6px 16px rgba(47, 128, 237, 0.25);
+}
+
+    .company-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    font-family: var(--font-heading);
+}
+
+.profile-subtitle {
+    color: #7A8A99;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.profile-badge {
+    display: inline-block;
+    background: var(--bg-light);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.profile-section {
+    margin-bottom: 28px;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+}
+
+    .section-title i {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        width: 24px;
+    }
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #E0E7F1;
+    font-size: 0.95rem;
+}
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+.info-label {
+    color: #7A8A99;
+    font-weight: 500;
+}
+
+.info-value {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+    .info-value a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: var(--transition-base);
+    }
+
+        .info-value a:hover {
+            color: #1E5BA8;
+        }
+
+.bio-text {
+    background: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.job-card {
+    background: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition-base);
+}
+
+    .job-card:hover {
+        box-shadow: 0 4px 12px rgba(47, 128, 237, 0.15);
+        transform: translateX(2px);
+    }
+
+.job-title {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.job-type {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    flex: 1;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-base);
+    font-size: 0.95rem;
+}
+
+    .btn-primary:hover {
+        background: #1E5BA8;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(47, 128, 237, 0.4);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+.btn-secondary {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-base);
+    font-size: 0.95rem;
+}
+
+    .btn-secondary:hover {
+        background: var(--bg-light);
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary:active {
+        transform: translateY(0);
+    }
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-menu {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar-actions {
+        margin-left: auto;
+    }
+
+    .dropdown-menu-custom {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-content {
+        padding: 30px 20px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 0.95rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .profile-container {
+        max-width: 100%;
+    }
+}
+

@@ -1,0 +1,305 @@
+﻿
+@inject ICategoryRepository _categoryRepository;
+
+@{
+    Layout = "_Layout";
+    var Categories = _categoryRepository.GetAll();
+}
+
+    @section Styles {
+        <link rel="stylesheet" href="~/css/home.css" />
+    }
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <h1>Find Your Dream Job Today</h1>
+                    <p>Join thousands of professionals who found their perfect career opportunity through HireUp.</p>
+
+                    <!-- Search Bar -->
+                    <div class="hero-search">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Job title, keywords, or company">
+                        </div>
+                        <div class="search-input-group">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" placeholder="Location">
+                        </div>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            Search Jobs
+                        </button>
+                    </div>
+
+                    <p style="margin-top: var(--spacing-md); font-size: 0.875rem;">
+                        <strong>Popular searches:</strong>
+                        <a href="#" style="color: rgba(255,255,255,0.9);">Developer</a>,
+                        <a href="#" style="color: rgba(255,255,255,0.9);">Designer</a>,
+                        <a href="#" style="color: rgba(255,255,255,0.9);">Marketing Manager</a>,
+                        <a href="#" style="color: rgba(255,255,255,0.9);">Sales</a>
+                    </p>
+                </div>
+
+                <div class="hero-features slide-in-right">
+                    <div class="hero-feature">
+                        <div class="hero-feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="hero-feature-text">Access to 10,000+ job listings</span>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="hero-feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="hero-feature-text">Connect with top employers</span>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="hero-feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="hero-feature-text">Get personalized job recommendations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Active Jobs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Job Seekers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15,000+</div>
+                    <div class="stat-label">Successful Hires</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse by Category</h2>
+                <p>Discover thousands of job opportunities with all the information you need</p>
+            </div>
+
+            <div class="categories-grid">
+            @for(int i = 0 ; i < Categories.Count() - 1; i++)
+            {
+                @* <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>@Categories[i].Name</h3>
+                    <p class="category-count">@Categories[i].Jobs.Count() jobs available</p>
+                </div> *@
+                <a asp-controller="Job" asp-action="Index" asp-route-categoryId="@Categories[i].Id"
+                   class="category-card" style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>@Categories[i].Name</h3>
+                    <p class="category-count">@Categories[i].Jobs.Count() jobs available</p>
+
+                </a>
+            }
+                @* <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Technology</h3>
+                    <p class="category-count">1250 jobs available</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Marketing</h3>
+                    <p class="category-count">890 jobs available</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h3>Design</h3>
+                    <p class="category-count">645 jobs available</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p class="category-count">1100 jobs available</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Healthcare</h3>
+                    <p class="category-count">780 jobs available</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education</h3>
+                    <p class="category-count">520 jobs available</p>
+                </div> *@
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Trusted Companies -->
+    <section class="companies-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Leading Companies</h2>
+                <p>Join the companies that trust HireUp to find their next team members</p>
+            </div>
+
+            <div class="companies-grid">
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/logos:google-icon.svg" alt="Google" width="50">
+                    <h4 style="color: var(--gray-400); margin: 0;">Google</h4>
+                </div>
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/logos:microsoft.svg" alt="Microsoft" width="120">
+                    <h4 style="color: var(--gray-400); margin: 0;">Microsoft</h4>
+                </div>
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/logos:aws.svg" alt="AWS" width="50">
+                    <h4 style="color: var(--gray-400); margin: 0;">AWS</h4>
+                </div>
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/simple-icons:openai.svg" alt="OpenAI" width="50">
+                    <h4 style="color: var(--gray-400); margin: 0;">OpenAI</h4>
+                </div>
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/logos:meta.svg" alt="Meta" width="120">
+                    <h4 style="color: var(--gray-400); margin: 0;">Meta</h4>
+                </div>
+                <div class="company-logo">
+                    <img src="https://api.iconify.design/logos:oracle.svg" alt="Oracle" width="120">
+                    <h4 style="color: var(--gray-400); margin: 0;">Oracle</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Users Say</h2>
+                <p>Real stories from people who found their dream jobs</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "HireUp made my job search so much easier. I found my dream position within two weeks of signing up. The platform is intuitive and the job recommendations were spot on!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AH</div>
+                        <div class="author-info">
+                            <h4>Ahmed Hassan</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "As an employer, HireUp has been invaluable. We've hired three amazing team members through the platform. The quality of candidates is exceptional."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Mohamed</h4>
+                            <p>HR Manager at TechCorp</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The user interface is clean and modern. I love how easy it is to filter jobs and save my favorites. Highly recommend HireUp to anyone looking for a career change!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">OK</div>
+                        <div class="author-info">
+                            <h4>Omar Khalil</h4>
+                            <p>Marketing Specialist</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of professionals who found their perfect job through HireUp</p>
+            <div class="cta-buttons">
+                <a asp-controller="Account" asp-action="SelectionRole" class="btn btn-light btn-lg">
+                    <i class="fas fa-user-plus"></i>
+                    Create Free Account
+                </a>
+                <a asp-controller="Job" asp-action="Index" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-search"></i>
+                    Explore Jobs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    @section Scripts {
+        <script src="~/js/home.js"></script>
+    }

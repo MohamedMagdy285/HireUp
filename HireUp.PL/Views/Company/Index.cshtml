@@ -1,0 +1,69 @@
+﻿@model List<CompanyViewModel>
+
+@inject ICategoryRepository _categoryRepository;
+@inject ICompanyRepository _companyRepository;
+@{
+    Layout = "_Layout";
+    var companies = _companyRepository.GetAll();
+    var Categories = _categoryRepository.GetAll();
+    // SelectList CategoryList = new SelectList(Categories, "Id", "Name");
+}
+@section Styles {
+    <link href="~/css/Company/CompanyIndex.css" rel="stylesheet">
+    <link href="~/css/Job/JobIndex.css" rel="stylesheet">
+}
+<!-- ===== SEARCH BAR SECTION ===== -->
+<form asp-controller="Company" asp-action="Index" method="get">
+    <section class="search-section">
+        <div class="container-lg">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text"
+                           class="search-input"
+                           id="searchInput"
+                           name="SearchValue"
+                           placeholder="Search companies by name...">
+                    <button type="submit" class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="search-error" id="searchError"></div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-- ===== MAIN CONTENT WITH SIDEBAR ===== -->
+<main class="container-lg mb-lg-5">
+    <div class="content-wrapper">
+        <!-- ===== CATEGORIES SIDEBAR ===== -->
+        <aside class="categories-sidebar">
+            <h3 class="sidebar-title"><i class="fas fa-filter"></i> Categories</h3>
+            <div class="categories-container">
+                <form method="get" asp-controller="Company" asp-action="Index">
+                    <button type="submit" class="category-pill @(ViewBag.CategoryId == null ? "active" : "")">
+                        <span class="category-name">All</span>
+                        <span class="count">@companies.Count()</span>
+                    </button>
+                </form>
+                @foreach (var cat in Categories)
+                {
+                    <form method="get" asp-controller="Company" asp-action="Index">
+                        <input type="hidden" name="categoryId" value="@cat.Id" />
+                        <button type="submit" class="category-pill @(ViewBag.CategoryId == cat.Id ? "active" : "")">
+                            <span class="category-name">@cat.Name</span>
+                            @* <span class="count">@(cat.Jobs?.Count() > 0 ? cat.Jobs.Count() : 0)</span> *@
+                            @* <span class="count">1</span> *@
+                        </button>
+                    </form>
+                }
+            </div>
+        </aside>
+        <!-- ===== Companies LISTING ===== -->
+        <partial name="PartialViews/_Companies" model="Model" />
+
+    </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/Company/CompanyIndex.js"></script>
+

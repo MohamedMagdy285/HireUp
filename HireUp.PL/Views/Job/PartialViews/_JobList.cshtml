@@ -1,0 +1,15 @@
+﻿@model List<JobViewModel>
+<!-- ===== JOBS LISTING ===== -->
+<section class="jobs-list-section">
+    @* <h3><i class="fas fa-briefcase"></i> <span id="jobsHeading">@ Jobs</span></h3> *@
+
+    <!-- Job Cards -->
+    <div id="jobsList">
+        <!-- Job Card 1 -->
+        @foreach (var job in Model)
+        {
+            <partial name="PartialViews/_JobCard" model="job" />
+        }
+    </div>
+    
+</section>

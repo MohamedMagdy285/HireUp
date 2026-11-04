@@ -1,0 +1,219 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <nav class="navbar" id="navbar">
+                <div class="container">
+                    <div class="navbar-container">
+
+                        <!-- Logo -->
+                        <div class="navbar-left">
+                            <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                                <i class="fas fa-briefcase"></i>
+                                <span class="brand-text">HireUp</span>
+                            </a>
+                        </div>
+
+                        <!-- Main Menu -->
+                        <div class="navbar-center">
+                            <ul class="navbar-menu">
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-controller="Job" asp-action="Index">Find Jobs</a></li>
+                                <li><a asp-controller="Company" asp-action="Index">Companies</a></li>
+                                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Right Side -->
+                        <div class="navbar-right">
+
+                            <!-- Theme Toggle -->
+                            <button class="theme-toggle" id="themeToggle">
+                                <i class="fas fa-moon"></i>
+                            </button>
+
+                            <!-- Language Selector -->
+                            <div class="language-selector" id="languageSelector">
+                                <button class="language-toggle">
+                                    <span class="language-flag">🇬🇧</span>
+                                    EN <i class="fas fa-chevron-down"></i>
+                                </button>
+
+                                <ul class="language-menu">
+                                    <li><a data-lang="en" class="active">🇬🇧 English</a></li>
+                                    <li><a data-lang="ar">🇸🇦 العربية</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- User Dropdown -->
+                            <div class="user-dropdown" id="userDropdown">
+                                <button class="dropdown-toggle">
+                                    <div class="user-avatar">
+                                        @User?.Identity?.Name?.FirstOrDefault()
+                                    </div>
+
+                                    <span class="user-name">@User.Identity.Name</span>
+                                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                </button>
+
+                                <ul class="dropdown-menu-custom">
+
+                                    @* <li><a asp-controller="Account" asp-action="Profile" asp-route=""><i class="fas fa-user"></i> Profile</a></li> *@
+                                   
+
+                                    @if (User.IsInRole("Company"))
+                                    {
+                                        <li>
+                                            <a asp-controller="Company"
+                                               asp-action="Profile"
+                                               asp-route-id="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value">
+                                                <i class="fas fa-user"></i> Profile
+                                            </a>
+                                        </li>
+                                        <li><a asp-controller="Job" asp-action="Add"><i class="fas fa-plus-circle"></i> Add New Job</a></li>
+                                        <li><a asp-controller="Job" asp-action="MyJobs"><i class="fas fa-briefcase"></i> My Jobs</a></li>
+                                        <li><a asp-controller="Application" asp-action="ApplicationsForMyJobs"><i class="fas fa-file-alt"></i> Applications</a></li>
+                                    }
+
+                                    @if (User.IsInRole("JobSeeker"))
+                                    {
+                                        <li>
+                                            <a asp-controller="Jobseeker"
+                                               asp-action="Profile"
+                                               asp-route-id="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value">
+                                                <i class="fas fa-user"></i> Profile
+                                            </a>
+                                        </li>
+                                        <li><a asp-controller="Application" asp-action="MyApplications"><i class="fas fa-file-alt"></i> My Applications</a></li>
+                                    }
+
+                                    <li><div class="dropdown-divider"></div></li>
+
+                                    <li>
+                                        <a asp-controller="Account" asp-action="Logout">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <button class="menu-toggle">
+                                <i class="fas fa-bars"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        }
+        else
+        {
+            <nav class="navbar">
+                <div class="container navbar-container">
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        <i class="fas fa-briefcase"></i> HireUp
+                    </a>
+
+                    <ul class="navbar-menu">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Job" asp-action="Index">Find Jobs</a></li>
+                        <li><a asp-controller="Company" asp-action="Index">Companies</a></li>
+                        <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    </ul>
+
+                    <div class="navbar-right">
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline">Sign In</a>
+                        <a asp-controller="Account" asp-action="SelectionRole" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </nav>
+        }
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>HireUp</h4>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: var(--spacing-lg);">
+                        Your trusted partner in finding the perfect career opportunity. Join thousands of professionals today.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Job Seekers</h4>
+                    <ul>
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Browse Categories</a></li>
+                        <li><a href="#">Job Alerts</a></li>
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Candidates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Employer Dashboard</a></li>
+                        <li><a href="#">Recruitment Resources</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 HireUp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/navbar.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
